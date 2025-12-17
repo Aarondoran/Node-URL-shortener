@@ -22,7 +22,7 @@ DotLink is a minimal URL shortener that allows the creation of shortened links w
 ### 1. Clone the Repository
 
 ```
-git clone https://github.com/YOUR_USERNAME/dotlink.git
+git clone https://github.com/Aarondoran/dotlink.git
 cd dotlink
 ```
 
