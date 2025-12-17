@@ -1,82 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>URL Shortener</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        .hero-bg {
-            background: linear-gradient(120deg, #6e8894, #544e61);
-            color: #fff;
-        }
-        .input-field {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .btn-primary {
-            background-color: #85baa1;
-            border: none;
-            padding: 10px 20px;
-            color: white;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #6e8894;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DotLink - Simple URL Shortener</title>
+  <link rel="icon" href="https://custom-icon-badges.demolab.com/badge/Aarondoran.me-blue?logo=aarondoran-pfp&labelColor=grey">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0d1117;
+      color: #c9d1d9;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .badges img {
+      margin-right: 6px;
+      margin-bottom: 10px;
+    }
+    h1, h2, h3 {
+      color: #f0f6fc;
+    }
+    pre {
+      background: #161b22;
+      padding: 16px;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    .demo {
+      margin: 24px 0;
+      padding: 16px;
+      background: #161b22;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .demo a {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      opacity: 0.7;
+    }
+  </style>
 </head>
-<body class="bg-gray-100">
+<body>
+  <div class="container">
+    <div class="badges">
+      <a href="https://github.com/Aarondoran/Node-URL-shortener/network"><img src="https://img.shields.io/github/forks/Aarondoran/Node-URL-shortener" alt="Forks"></a>
+      <a href="https://github.com/Aarondoran/Node-URL-shortener/stargazers"><img src="https://img.shields.io/github/stars/Aarondoran/Node-URL-shortener" alt="Stars"></a>
+      <a href="https://github.com/Aarondoran/Node-URL-shortener/releases"><img src="https://img.shields.io/github/v/release/Aarondoran/Node-URL-shortener" alt="Releases"></a>
+      <a href="https://github.com/Aarondoran/Node-URL-shortener/commits/main"><img src="https://img.shields.io/github/last-commit/Aarondoran/Node-URL-shortener" alt="Last Commit"></a>
+      <a href="https://aarondoran.me"><img src="https://custom-icon-badges.demolab.com/badge/Aarondoran.me-blue?logo=aarondoran-pfp&labelColor=grey" alt="Website"></a>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="hero-bg py-20">
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-4">URL shortener</h1>
-            <p class="text-lg mb-6">This is a Demo</p>
-        </div>
-    </section>
+    <h1>DotLink - Simple URL Shortener</h1>
 
-    <!-- URL Shortener Form Section -->
-    <section class="py-16 bg-gray-200">
-        <div class="container mx-auto px-4">
-            <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-semibold mb-4">Create Your Short URL</h2>
-                <form id="shortenForm">
-                    <div class="mb-4">
-                        <label for="originalUrl" class="block text-sm font-medium text-gray-700">Original URL</label>
-                        <input type="url" id="originalUrl" name="originalUrl" required class="w-full p-3 mt-2 text-gray-900 input-field" placeholder="Enter your URL here">
-                    </div>
-                    <div class="mb-4">
-                        <label for="customAlias" class="block text-sm font-medium text-gray-700">Custom Alias</label>
-                        <input type="text" id="customAlias" name="customAlias" required class="w-full p-3 mt-2 text-gray-900 input-field" placeholder="Custom alias (e.g., my-link)" minlength="3">
-                    </div>
-                    <button type="submit" class="btn-primary w-full py-3 mt-4">Shorten URL</button>
-                </form>
+    <p>DotLink is a minimal URL shortener that allows the creation of shortened links with optional custom aliases. Anyone can access shortened links, and the API also provides statistics such as click counts and original URLs.</p>
 
-                <!-- Response Section -->
-                <div id="result" class="mt-6 hidden">
-                    <h3 class="text-lg font-semibold">Your Short URL</h3>
-                    <p id="shortUrl" class="text-blue-500"></p>
-                    <button id="copyBtn" class="btn-primary mt-4 w-full py-3">Copy URL</button>
-                </div>
-            </div>
-        </div>
-        <!-- You can add a footer here(css is already done) -->
-    </section>
+    <div class="demo">
+      <p>Live Demo</p>
+      <a href="https://dotlink-url-shortener.vercel.app" target="_blank">https://dotlink-url-shortener.vercel.app</a>
+    </div>
 
-    <script>
-        const form = document.getElementById("shortenForm");
+    <h2>Features</h2>
+    <ul>
+      <li>Custom aliases for shortened links</li>
+      <li>PostgreSQL database integration</li>
+      <li>Simple REST API with Express</li>
+      <li>Link analytics endpoint to check clicks and original URL</li>
+      <li>Custom 404 page for invalid or non-existent links</li>
+    </ul>
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
+    <h2>Setup</h2>
 
-            alert('received URL(This is a Demo, the app would now give you the shortened Url below the form with a copy button)');
-        });
-    </script>
+    <h3>1. Clone the Repository</h3>
+    <pre><code>git clone https://github.com/Aarondoran/Node-URL-shortener.git
+cd Node-URL-shortener</code></pre>
+
+    <h3>2. Install Dependencies</h3>
+    <pre><code>npm install</code></pre>
+
+    <h3>3. Configure Environment Variables</h3>
+    <pre><code>PORT=3030
+DATABASE_URL=postgresql://YOUR_USERNAME:YOUR_PASSWORD@YOUR_HOST/YOUR_DATABASE</code></pre>
+
+    <h3>4. Set Up the Database</h3>
+    <pre><code>CREATE TABLE urls (
+  id SERIAL PRIMARY KEY,
+  short_id VARCHAR(255) NOT NULL,
+  original_url TEXT NOT NULL,
+  clicks INTEGER DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+
+    <h3>5. Start the Server</h3>
+    <pre><code>node server.js</code></pre>
+
+    <h2>API Endpoints</h2>
+
+    <h3>Shorten a URL</h3>
+    <pre><code>POST /api/shorten
+
+{
+  "originalUrl": "https://example.com",
+  "customAlias": "myalias"
+}</code></pre>
+
+    <h3>Redirect to Original URL</h3>
+    <pre><code>GET /:short_id</code></pre>
+
+    <h3>Check Link Information</h3>
+    <pre><code>GET /check/:id</code></pre>
+
+    <footer>
+      <p>MIT License</p>
+    </footer>
+  </div>
 </body>
 </html>
