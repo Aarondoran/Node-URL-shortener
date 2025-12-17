@@ -1,80 +1,148 @@
+[![Forks](https://img.shields.io/github/forks/Aarondoran/Node-URL-shortener)](https://github.com/Aarondoran/Node-URL-shortener/network)
+[![Stars](https://img.shields.io/github/stars/Aarondoran/Node-URL-shortener)](https://github.com/Aarondoran/Node-URL-shortener/stargazers)
+[![Releases](https://img.shields.io/github/v/release/Aarondoran/Node-URL-shortener)](https://github.com/Aarondoran/Node-URL-shortener/releases)
+[![Last Commit](https://img.shields.io/github/last-commit/Aarondoran/Node-URL-shortener)](https://github.com/Aarondoran/Node-URL-shortener/commits/main)
+[![Website](https://custom-icon-badges.demolab.com/badge/Aarondoran.me-blue?logo=aarondoran-pfp&labelColor=grey)](https://aarondoran.me)
+
+
 # DotLink - Simple URL Shortener
-DotLink is a minimal URL shortener that allows only the owner to create shortened links using a password-based authentication system. Anyone can access shortened links, but only authorized users can create new ones.
+
+DotLink is a minimal URL shortener that allows the creation of shortened links with optional custom aliases. Anyone can access shortened links, and the API also provides statistics such as click counts and original URLs.
 
 ## Features
-- Password-protected URL shortening
 
-- Custom aliases for shortened links
-
-- PostgreSQL database integration
-
-- Simple REST API with Express
+* Custom aliases for shortened links
+* PostgreSQL database integration
+* Simple REST API with Express
+* Link analytics endpoint to check clicks and original URL
+* Custom 404 page for invalid or non-existent links
 
 ## Setup
-1️. Clone the Repository
-Use the following command:
 
-``git clone https://github.com/YOUR_USERNAME/dotlink.git  
-cd dotlink``
+### 1. Clone the Repository
 
-2️. Install Dependencies
-Run the following command:
+```
+git clone https://github.com/YOUR_USERNAME/dotlink.git
+cd dotlink
+```
 
-`npm install`
+### 2. Install Dependencies
 
-3️. Configure Environment Variables
-Create a .env file in the root directory and add the following:
+```
+npm install
+```
 
-`PORT=3030  
-DATABASE_URL=postgresql://YOUR_USERNAME:YOUR_PASSWORD@YOUR_HOST/YOUR_DATABASE`
+### 3. Configure Environment Variables
 
-Replace the DATABASE_URL with your actual PostgreSQL connection string.
+Create a `.env` file in the root directory and add the following:
 
-4️. Set Up the Database
-Create a urls table in your PostgreSQL database:
+```
+PORT=3030
+DATABASE_URL=postgresql://YOUR_USERNAME:YOUR_PASSWORD@YOUR_HOST/YOUR_DATABASE
+```
 
-`CREATE TABLE urls (  
-    id SERIAL PRIMARY KEY,  
-    short_id VARCHAR(255) UNIQUE NOT NULL,  
-    original_url TEXT NOT NULL,  
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  
-);`
+Replace `DATABASE_URL` with your actual PostgreSQL connection string.
 
-5️. Start the Server
+### 4. Set Up the Database
+
+Create the `urls` table in your PostgreSQL database:
+
+```
+CREATE TABLE urls (
+  id SERIAL PRIMARY KEY,
+  short_id VARCHAR(255) NOT NULL,
+  original_url TEXT NOT NULL,
+  clicks INTEGER DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### 5. Start the Server
+
 Run manually:
 
-`node server.js`
+```
+node server.js
+```
 
-OR
+OR run with PM2 (recommended for production):
 
-Run with PM2 (recommended for production):
-
-`pm2 start server.js --name dotlink`
+```
+pm2 start server.js --name dotlink
+```
 
 ## API Endpoints
-➤ Shorten a URL (Requires Password)
-Endpoint:
+
+### ➤ Shorten a URL
+
+**Endpoint:**
+
+```
 POST /api/shorten
+```
 
-Request Body:
-`{  
-  "originalUrl": "https://example.com",  
-  "customAlias": "myalias",  
-}`
-Response:
-`{  
-  "shortUrl": "http://yourdomain.com/myalias"  
-}`
+**Request Body:**
 
-➤ Redirect to Original URL
-Usage:
-GET `/:short_id`
+```
+{
+  "originalUrl": "https://example.com",
+  "customAlias": "myalias"
+}
+```
 
-Example:
-GET `http://yourdomain.com/myalias`
+**Response:**
 
-➤ Redirects to https://example.com
+```
+{
+  "shortUrl": "http://yourdomain.com/myalias"
+}
+```
+
+---
+
+### ➤ Redirect to Original URL
+
+**Endpoint:**
+
+```
+GET /:short_id
+```
+
+**Example:**
+
+```
+GET http://yourdomain.com/myalias
+```
+
+Redirects to:
+
+```
+https://example.com
+```
+
+---
+
+### ➤ Check Link Information
+
+Returns the original URL and click count for a shortened link.
+
+**Endpoint:**
+
+```
+GET /check/:id
+```
+
+**Response:**
+
+```
+{
+  "short_id": "myalias",
+  "original_url": "https://example.com",
+  "clicks": 42,
+  "created_at": "2024-01-01T12:00:00.000Z"
+}
+```
 
 ## License
-This project is licensed under the MIT License.
 
+This project is licensed under the MIT License.
