@@ -8,7 +8,7 @@
 
 # DotLink - Simple URL Shortener
 
-**Docs & Live Demo:** [dotlink.js.org](https://dotlink.org)
+**Docs & Live Demo:** [dotlink.js.org](https://dotlink.js.org)
 
 DotLink is a minimal URL shortener that allows the creation of shortened links with optional custom aliases. Anyone can access shortened links, and the API also provides statistics such as click counts and original URLs.
 
