@@ -1,3 +1,4 @@
+![Endpoint Badge for demo](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FAarondoran%2Fuptime%2Frefs%2Fheads%2Fmaster%2Fapi%2Fnode-url-shortener%2Fuptime-day.json&label=demo-uptime%2024h)
 [![Forks](https://img.shields.io/github/forks/Aarondoran/Node-URL-shortener)](https://github.com/Aarondoran/Node-URL-shortener/network)
 [![Stars](https://img.shields.io/github/stars/Aarondoran/Node-URL-shortener)](https://github.com/Aarondoran/Node-URL-shortener/stargazers)
 [![Releases](https://img.shields.io/github/v/release/Aarondoran/Node-URL-shortener)](https://github.com/Aarondoran/Node-URL-shortener/releases)
